@@ -5,7 +5,7 @@ import router from "./router.js";
 
 const PORT = process.env.PORT ?? 3000;
 const DB_URL =
-    "mongodb+srv://dmishisterov:gOOzATPKj3g9Q6nU@cluster0.usymf.mongodb.net/xsolla_summer2021_be?retryWrites=true&w=majority";
+    "mongodb+srv://dmishisterov:9dZKuAWUUjZFKaKc@cluster0.usymf.mongodb.net/xsolla_summer2021_be?retryWrites=true&w=majority";
 
 const app = express();
 
