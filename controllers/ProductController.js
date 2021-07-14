@@ -71,6 +71,7 @@ class ProductController {
     async getAll(req, res) {
         const filter = req.query;
         const query = {};
+        const sortParam = {};
         try {
             if (filter.sku) {
                 query.sku = filter.sku;
@@ -78,22 +79,29 @@ class ProductController {
             if (filter.type) {
                 const queryParams = filter.type;
                 const paramsArray = queryParams.split(",");
-                const product = await Product.find({
-                    $or: [{ type: paramsArray[0] }, { type: paramsArray[1] }],
-                });
-                return res.json(product);
+                query.$or = [{ type: paramsArray[0] }, { type: paramsArray[1] }];
             }
             if (filter.sort) {
-                const sortParam = filter.sort.split("_");
-                switch (sortParam[1]) {
+                const queryParams = filter.sort;
+                const paramsArray = queryParams.split("_");
+                console.log("paramsArray[1]:", paramsArray[1]);
+                switch (paramsArray[1]) {
+                    case "asc":
+                        sortParam[paramsArray[0]] = 1;
+                        console.log("asc:", sortParam);
+                        break;
                     case "desc":
-                        const product1 = await Product.find({}).sort({ price: -1 });
-                        return res.json(product1);
+                        sortParam[paramsArray[0]] = -1;
+                        console.log("desc:", sortParam);
+                        break;
                     default:
-                        const product2 = await Product.find({}).sort({ price: 1 });
-                        return res.json(product2);
+                        sortParam[paramsArray[0]] = 1;
+                        console.log("default", sortParam);
+                        break;
                 }
             }
+            const product = await Product.find(query).sort(sortParam);
+            return res.json(product);
         } catch (error) {
             res.status(500).json(error);
         }
