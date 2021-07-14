@@ -27,7 +27,6 @@ class ProductController {
         const product = req.body;
         try {
             if (!product._id && !product.sku) {
-                console.log("Error: product not found");
                 res.status(400).json({ message: "product not found" });
             }
             if (product._id) {
@@ -84,19 +83,15 @@ class ProductController {
             if (filter.sort) {
                 const queryParams = filter.sort;
                 const paramsArray = queryParams.split("_");
-                console.log("paramsArray[1]:", paramsArray[1]);
                 switch (paramsArray[1]) {
                     case "asc":
                         sortParam[paramsArray[0]] = 1;
-                        console.log("asc:", sortParam);
                         break;
                     case "desc":
                         sortParam[paramsArray[0]] = -1;
-                        console.log("desc:", sortParam);
                         break;
                     default:
                         sortParam[paramsArray[0]] = 1;
-                        console.log("default", sortParam);
                         break;
                 }
             }
