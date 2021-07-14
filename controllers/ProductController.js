@@ -81,15 +81,19 @@ class ProductController {
                 const product = await Product.find({
                     $or: [{ type: paramsArray[0] }, { type: paramsArray[1] }],
                 });
-                console.log("p0:", paramsArray[0]);
-                console.log("p1:", paramsArray[1]);
-                console.log("p:", product);
                 return res.json(product);
             }
-
-            const product = await Product.find(query);
-            console.log(query);
-            return res.json(product);
+            if (filter.sort) {
+                const sortParam = filter.sort.split("_");
+                switch (sortParam[1]) {
+                    case "desc":
+                        const product1 = await Product.find({}).sort({ price: -1 });
+                        return res.json(product1);
+                    default:
+                        const product2 = await Product.find({}).sort({ price: 1 });
+                        return res.json(product2);
+                }
+            }
         } catch (error) {
             res.status(500).json(error);
         }
