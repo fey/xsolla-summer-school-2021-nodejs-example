@@ -19,7 +19,7 @@ async function startApp() {
             useNewUrlParser: true,
             useFindAndModify: false,
         });
-        app.listen(3000, () => {
+        app.listen(PORT, () => {
             console.log(`server has been started on port ${PORT}...`);
         });
     } catch (error) {
