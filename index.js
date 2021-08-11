@@ -2,11 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import router from "./router.js";
+import { DB_URL, PORT_APP } from "./config/config.js";
 
-const PORT = process.env.PORT ?? 3000;
-const DB_URL =
-    "mongodb+srv://dmishisterov:9dZKuAWUUjZFKaKc@cluster0.usymf.mongodb.net/xsolla_summer2021_be?retryWrites=true&w=majority";
-
+const PORT = process.env.PORT ?? PORT_APP;
 const app = express();
 
 app.use(express.json());
@@ -26,5 +24,4 @@ async function startApp() {
         console.log(error);
     }
 }
-
 startApp();

@@ -1,6 +1,7 @@
 import Product from "../models/Product.js";
 
 class ProductController {
+    
     async create(req, res) {
         try {
             const { sku, type, name, price } = req.body;
