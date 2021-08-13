@@ -8,7 +8,7 @@ const PORT = process.env.PORT ?? PORT_APP;
 const app = express();
 
 app.use(express.json());
-app.use("/api", router);
+app.use("/api/", router);
 
 async function startApp() {
     try {

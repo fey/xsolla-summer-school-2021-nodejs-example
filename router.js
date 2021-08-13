@@ -3,11 +3,12 @@ import ProductController from "./controllers/ProductController.js";
 
 const router = new Router();
 
-router.post("/products", ProductController.create);
-router.get("/products/:id", ProductController.read);
-router.get("/products", ProductController.getAll);
-router.put("/products", ProductController.update);
-router.delete("/products/:id", ProductController.delete);
-router.delete("/products", ProductController.delete);
+router.post("/v1/products", ProductController.create);
+router.get("/v1/products/id/:id", ProductController.read);
+router.get("/v1/products/sku/:sku", ProductController.read);
+router.get("/v1/products", ProductController.read);
+router.put("/v1/products", ProductController.update);
+router.delete("/v1/products/id/:id", ProductController.delete);
+router.delete("/v1/products/sku/:sku", ProductController.delete);
 
 export default router;
